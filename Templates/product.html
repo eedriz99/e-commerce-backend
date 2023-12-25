@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product detail</title>
+  </head>
+  <body>
+    <h1>Product detail</h1>
+
+    {% if product %}
+
+    <div class="product">
+      <img src="{{ product.image }}" alt="{{ product.name }}" />
+    </div>
+
+    <h3>{{ product.name }}</h3>
+    <p><strong>Price:</strong> {{ product.price }}</p>
+    <p><strong>Brand:</strong> {{ product.brand }}</p>
+    
+    {% else %}
+    <p>No product found.</p>
+    {% endif %}
+  </body>
+</html>
