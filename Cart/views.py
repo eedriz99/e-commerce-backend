@@ -60,17 +60,10 @@ def remove_from_cart(request, uuid):
 @login_required
 @api_view(['GET'])
 def view_cart(request):
-    try:  # try to get cart item for a user if authenticated
-        cart_item_obj = Cart.objects.get(owner=request.user)
-        cart_item_list = cart_item_obj.items.all()
-        # cart_item_price = sum([item.product.price * item.quantity for item in cart_item_obj.items.all()])
-    except TypeError:  # if error occur from user not logged in
-        cart_item_list = None
-        # cart_item_price = 0
+    cart_item_obj = Cart.objects.get(owner=request.user)
+    serialize_data = CartSerializer(cart_item_obj)
+    cart_item_list = cart_item_obj.items.all()
+    # cart_item_price = sum([item.product.price * item.quantity for item in cart_item_obj.items.all()])
 
-    except Cart.DoesNotExist:  # if cart is empty
-        cart_item_list = None
-        # cart_item_price = 0
-
-    data = {'cart_items': cart_item_list, }
+    data = {'cart_items': serialize_data.data, }
     return Response(data=data)
