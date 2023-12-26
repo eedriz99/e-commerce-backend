@@ -32,7 +32,10 @@ urlpatterns = [
          product_views.single_product, name='single-product'),
     path('paginatedproducts/', product_views.get_paginated_products,
          name='paginated-products'),
-    path('cart/', cart_views.cartView, name='cart-view')
+    path('cart/view', cart_views.view_cart, name='cart-view'),
+    path('cart/add/<str:uuid>', cart_views.add_to_cart, name="add_to_cart"),
+    path('cart/remove/<str:uuid>', cart_views.remove_from_cart,
+         name='remove_from_cart'),
     # path('', include(router.urls))
 ]
 
